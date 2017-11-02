@@ -3,16 +3,14 @@ require "fog/openstack"
 class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
   attr_reader :client, :container
 
-  def initialize(container:, openstack_username:, openstack_api_key:, openstack_auth_url:, openstack_domain_id: "default", openstack_project_name:, openstack_temp_url_key:, connection_options: {})
-    @client = Fog::Storage::OpenStack.new(
-      openstack_auth_url: openstack_auth_url,
-      openstack_username: openstack_username,
-      openstack_api_key: openstack_api_key,
-      openstack_project_name: openstack_project_name,
-      openstack_domain_id: openstack_domain_id,
-      openstack_temp_url_key: openstack_temp_url_key,
-      connection_options: connection_options
-    )
+  def initialize(container:, credentials:, connection_options: {})
+    if connection_options.present?
+      settings = credentials.reverse_merge({connection_options: connection_options})
+    else
+      settings = credentials
+    end
+
+    @client = Fog::Storage::OpenStack.new(settings)
     @container = @client.directories.get(container)
   end
 
@@ -34,6 +32,7 @@ class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
   def download(key)
     if block_given?
       instrument :streaming_download, key do
+        # FIXME: Stream the download
         # stream(key, &block)
         yield file_for(key).body
       end
@@ -61,10 +60,7 @@ class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
   def url(key, expires_in:, disposition:, filename:, content_type:)
     instrument :url, key do |payload|
       expire_at = unix_timestamp_expires_at(expires_in)
-      generated_url = file_for(key).url(expire_at,
-        content_disposition: content_disposition_with(type: disposition, filename: filename),
-        content_type: content_type
-      )
+      generated_url = file_for(key).url(expire_at)
 
       payload[:url] = generated_url
 
@@ -75,10 +71,7 @@ class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
   def url_for_direct_upload(key, expires_in:, content_type:, content_length:)
     instrument :url, key do |payload|
       expire_at = unix_timestamp_expires_at(expires_in)
-      generated_url = client.create_temp_url(container.key, key, expire_at, "PUT",
-        content_disposition: content_disposition_with(type: disposition, filename: filename),
-        content_type: content_type
-      )
+      generated_url = client.create_temp_url(container.key, key, expire_at, "PUT")
 
       payload[:url] = generated_url
 
