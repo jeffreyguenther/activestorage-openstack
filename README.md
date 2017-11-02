@@ -16,6 +16,26 @@ And then execute:
 
 In your `services.yml`...
 
+```
+dev_openstack:
+  service: OpenStack
+  container: <container name>
+  credentials: #you can put what you want here and it will be directly passed to `Fog::Storage::OpenStack.new`
+    openstack_auth_url: <auth url>
+    openstack_username: <username>
+    openstack_api_key: "<password>"
+    openstack_project_name: <tenant name>
+    openstack_domain_id: default
+    openstack_temp_url_key: secret
+# connection_options:
+```
+
+In your cloud hosting service, set your container to private and you'll to set
+the `Temp-URL-Key` on the container or account. Depending on your OpenStack
+provider, you'll likely have to use the CLI tools to set this value.
+Instructions can be found in the [tempUrl
+Docs](https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html#secret-keys)
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
