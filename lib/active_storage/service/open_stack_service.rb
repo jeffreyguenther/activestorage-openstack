@@ -60,7 +60,8 @@ class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
 
   def url(key, expires_in:, disposition:, filename:, content_type:)
     instrument :url, key do |payload|
-      generated_url = file_for(key).url(expires_in,
+      expire_at = unix_timestamp_expires_at(expires_in)
+      generated_url = file_for(key).url(expire_at,
         content_disposition: content_disposition_with(type: disposition, filename: filename),
         content_type: content_type
       )
@@ -73,7 +74,8 @@ class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
 
   def url_for_direct_upload(key, expires_in:, content_type:, content_length:)
     instrument :url, key do |payload|
-      generated_url = client.create_temp_url(container.key, key, expires_in, "PUT",
+      expire_at = unix_timestamp_expires_at(expires_in)
+      generated_url = client.create_temp_url(container.key, key, expire_at, "PUT",
         content_disposition: content_disposition_with(type: disposition, filename: filename),
         content_type: content_type
       )
@@ -89,6 +91,10 @@ class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
   end
 
   private
+    def unix_timestamp_expires_at(seconds_from_now)
+      Time.current.advance(seconds: seconds_from_now).to_i
+    end
+
     def file_for(key)
       container.files.get(key)
     end
