@@ -53,6 +53,7 @@ set your mileage may vary. This should get you started in your hunt. :smiley:
 - [ ] Fix streaming for downloads
 - [ ] Smartly pick whether uploads should be chunked
 - [ ] Require mime-types so as to not require extra setup.
+- [ ] Test the service
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
 `rake test` to run the tests. You can also run `bin/console` for an interactive
