@@ -23,7 +23,7 @@ dev_openstack:
   credentials: #you can put what you want here and it will be directly passed to `Fog::Storage::OpenStack.new`
     openstack_auth_url: <auth url>
     openstack_username: <username>
-    openstack_api_key: "<password>"
+    openstack_api_key: <password>
     openstack_project_name: <tenant name>
     openstack_domain_id: default
     openstack_temp_url_key: secret
