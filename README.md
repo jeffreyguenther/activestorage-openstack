@@ -38,6 +38,11 @@ Docs](https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html#
 
 ## Development
 
+### Todo
+- [ ] Support disposition and filename in URLs
+- [ ] Fix streaming for downloads
+- [ ] Smarly pick whether uploads should be chunked
+
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
 `rake test` to run the tests. You can also run `bin/console` for an interactive
 prompt that will allow you to experiment.
