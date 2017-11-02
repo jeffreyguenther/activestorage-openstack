@@ -3,14 +3,13 @@ require "fog/openstack"
 class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
   attr_reader :client, :container
 
-  def initialize(container:, openstack_username:, openstack_api_key:,
-    openstack_region:, openstack_auth_url:, openstack_project_id:, openstack_temp_url_key:, connection_options:)
+  def initialize(container:, openstack_username:, openstack_api_key:, openstack_auth_url:, openstack_domain_id: "default", openstack_project_name:, openstack_temp_url_key:, connection_options: {})
     @client = Fog::Storage::OpenStack.new(
       openstack_auth_url: openstack_auth_url,
       openstack_username: openstack_username,
       openstack_api_key: openstack_api_key,
-      openstack_project_id: openstack_project_id,
-      openstack_region: openstack_region,
+      openstack_project_name: openstack_project_name,
+      openstack_domain_id: openstack_domain_id,
       openstack_temp_url_key: openstack_temp_url_key,
       connection_options: connection_options
     )
@@ -35,7 +34,8 @@ class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
   def download(key)
     if block_given?
       instrument :streaming_download, key do
-        stream(key, &block)
+        # stream(key, &block)
+        yield file_for(key).body
       end
     else
       instrument :download, key do

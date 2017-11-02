@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "activestorage/openstack/version"
+require "active_storage/openstack/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "activestorage-openstack"
-  spec.version       = Activestorage::Openstack::VERSION
+  spec.version       = ActiveStorage::Openstack::VERSION
   spec.authors       = ["Jeffrey Guenther"]
   spec.email         = ["guenther.jeffrey@gmail.com"]
 
@@ -19,8 +19,9 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activerecord"
+  spec.add_dependency "activestorage"
   spec.add_dependency "fog-openstack"
+  spec.add_dependency "mime-types"
 
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
