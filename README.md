@@ -51,8 +51,8 @@ set your mileage may vary. This should get you started in your hunt. :smiley:
 ### Todo
 - [ ] Support disposition and filename in URLs
 - [ ] Fix streaming for downloads
-- [ ] Smarly pick whether uploads should be chunked
-- [ ] Require mime-types so as to no require extra setup.
+- [ ] Smartly pick whether uploads should be chunked
+- [ ] Require mime-types so as to not require extra setup.
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
 `rake test` to run the tests. You can also run `bin/console` for an interactive
