@@ -15,7 +15,7 @@ And then execute:
 
 ## Usage
 
-In your `services.yml`, create an entry for your OpenStack service. Like other
+In your `storage.yml`, create an entry for your OpenStack service. Like other
 services, you can create as many as you want. For example, you might a separate
 service definition for staging and production so you can isolate the containers.
 
