@@ -29,7 +29,7 @@ dev_openstack:
     openstack_api_key: <password>
     openstack_project_name: <tenant name>
     openstack_domain_id: default
-    openstack_temp_url_key: secret
+    openstack_temp_url_key: <temp url key>
  connection_options: # optional
 ```
 You can put what the appropriate login params for your version of Keystone in
