@@ -19,11 +19,10 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activestorage"
+  spec.add_dependency "activestorage", "~> 5.2.0.beta2"
   spec.add_dependency "fog-openstack"
   spec.add_dependency "mime-types"
 
-  spec.add_development_dependency "bundler", "~> 1.15"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency "rails", "~> 5.2.0.beta2"
+  spec.add_development_dependency "sqlite3"
 end

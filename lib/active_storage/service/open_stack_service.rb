@@ -68,7 +68,7 @@ class ActiveStorage::Service::OpenStackService < ActiveStorage::Service
     end
   end
 
-  def url_for_direct_upload(key, expires_in:, content_type:, content_length:)
+  def url_for_direct_upload(key, expires_in:, content_type:, content_length:, checksum:)
     instrument :url, key do |payload|
       expire_at = unix_timestamp_expires_at(expires_in)
       generated_url = client.create_temp_url(container.key, key, expire_at, "PUT")
