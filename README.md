@@ -15,7 +15,7 @@ And then execute:
 
 ## Usage
 
-In your `services.yml`, create an entry for your OpenStack service. Like other
+In your `storage.yml`, create an entry for your OpenStack service. Like other
 services, you can create as many as you want. For example, you might a separate
 service definition for staging and production so you can isolate the containers.
 
@@ -29,7 +29,7 @@ dev_openstack:
     openstack_api_key: <password>
     openstack_project_name: <tenant name>
     openstack_domain_id: default
-    openstack_temp_url_key: secret
+    openstack_temp_url_key: <temp url key>
  connection_options: # optional
 ```
 You can put what the appropriate login params for your version of Keystone in
