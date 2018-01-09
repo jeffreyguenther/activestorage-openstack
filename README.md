@@ -49,6 +49,7 @@ set your mileage may vary. This should get you started in your hunt. :smiley:
 ## Development
 
 ### Todo
+- [ ] Complete direct uploads implementation. CORS must be supported on OpenStack for this to be possible.
 - [ ] Support disposition and filename in URLs
 - [ ] Fix streaming for downloads
 - [ ] Smartly pick whether uploads should be chunked
