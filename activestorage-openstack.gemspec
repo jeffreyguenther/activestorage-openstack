@@ -23,6 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "fog-openstack"
   spec.add_dependency "mime-types"
 
-  spec.add_development_dependency "rails", "~> 5.2.0.beta2"
+  spec.add_development_dependency "rails", "~> 5.2.0"
   spec.add_development_dependency "sqlite3"
 end
