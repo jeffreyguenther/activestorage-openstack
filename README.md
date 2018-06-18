@@ -1,5 +1,7 @@
 > :warning: I've stopped work on this extension b/c the OpenStack provider I was using on a project didn't have CORS support. To complete this effort, we need an OpenStack provider with CORS support. I'm happy to review PRs or handoff the code to someone who is keen on maintaining the code. 😃
 
+> :clap: I'm happy to report @chaadow has completed this work. You should use https://github.com/chaadow/activestorage-openstack/ going forward!!
+
 # ActiveStorage OpenStack
 
 ## Installation
